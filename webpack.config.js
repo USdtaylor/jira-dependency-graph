@@ -10,6 +10,7 @@ const paths = {
 }
 
 module.exports = {
+   devtool: 'source-map',
    entry: path.join(paths.JS, 'app.js'),
    output: {
       path: paths.DIST,
@@ -33,5 +34,13 @@ module.exports = {
          test: /\.(png|jpg|gif)$/,
          use: ['file-loader']
       }]
+   },
+   devServer: {
+      proxy: {
+         '/api/**': {
+            target: 'http://localhost:3000',
+            secure: false
+         }
+      }
    }
 }
